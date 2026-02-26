@@ -6,15 +6,6 @@ import Razorpay from "razorpay"
 import { nanoid } from "nanoid"
 import { PaymentType } from "@prisma/client"
 
-if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
-  throw new Error("Razorpay keys missing in environment")
-}
-
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-})
-
 function serializePayment(payment: any) {
   return {
     ...payment,
@@ -27,6 +18,20 @@ function serializePayment(payment: any) {
 
 export async function POST(req: Request) {
   try {
+    // ✅ Move env check inside handler
+    if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+      return NextResponse.json(
+        { error: "Razorpay keys missing in environment" },
+        { status: 500 }
+      )
+    }
+
+    // ✅ Initialize Razorpay inside runtime
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    })
+
     const body = await req.json()
     const leadId = Number(body.leadId)
     const type = body.type as PaymentType
@@ -117,6 +122,7 @@ export async function POST(req: Request) {
 
   } catch (error) {
     console.error("Generate Payment Error:", error)
+
     return NextResponse.json(
       { error: "Failed to generate payment link" },
       { status: 500 }
