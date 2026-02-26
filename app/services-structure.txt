@@ -1,0 +1,104 @@
+Folder PATH listing
+Volume serial number is 000000AA 48D5:340E
+C:\USERS\RAGHA\DOWNLOADS\EVENTSAMAROH_READY_STRUCTURE\APPS\WEB\APP\SERVICES
+|   page.tsx
+|   
++---birthday-parties
+|   |   page.tsx
+|   |   
+|   +---catering-entertainment
+|   |       page.tsx
+|   |       
+|   +---kids-party-planning
+|   |       page.tsx
+|   |       
+|   +---on-site-management
+|   |       page.tsx
+|   |       
+|   +---photography
+|   |       page.tsx
+|   |       
+|   +---theme-decoration
+|   |       page.tsx
+|   |       
+|   \---venue-booking
+|           page.tsx
+|           
++---corporate-events
+|   |   page.tsx
+|   |   
+|   +---annual-meetings
+|   |       page.tsx
+|   |       
+|   +---conferences
+|   |       page.tsx
+|   |       
+|   +---on-site-management
+|   |       page.tsx
+|   |       
+|   +---product-launch
+|   |       page.tsx
+|   |       
+|   +---stage-av
+|   |       page.tsx
+|   |       
+|   \---venue-booking
+|           page.tsx
+|           
++---decor-design
+|   |   page.tsx
+|   |   
+|   +---custom-installations
+|   |       page.tsx
+|   |       
+|   +---floral-styling
+|   |       page.tsx
+|   |       
+|   +---lighting-design
+|   |       page.tsx
+|   |       
+|   +---stage-mandap
+|   |       page.tsx
+|   |       
+|   \---theme-concepts
+|           page.tsx
+|           
++---private-parties
+|   |   page.tsx
+|   |   
+|   +---catering-entertainment
+|   |       page.tsx
+|   |       
+|   +---on-site-management
+|   |       page.tsx
+|   |       
+|   +---photography
+|   |       page.tsx
+|   |       
+|   +---theme-decor
+|   |       page.tsx
+|   |       
+|   \---venue-booking
+|           page.tsx
+|           
+\---wedding-planning
+    |   page.tsx
+    |   
+    +---artists
+    |       page.tsx
+    |       
+    +---catering
+    |       page.tsx
+    |       
+    +---coordination
+    |       page.tsx
+    |       
+    +---decor-mandap
+    |       page.tsx
+    |       
+    +---photography
+    |       page.tsx
+    |       
+    \---venue-selection
+            page.tsx
+            

@@ -1,0 +1,227 @@
+import Image from "next/image";
+import Link from "next/link";
+import { CheckCircle } from "lucide-react";
+
+export const metadata = {
+  title: "Private Party Venue Booking in Pune | Premium Party Venues",
+  description:
+    "Professional private party venue booking services in Pune including banquet halls, rooftop venues, resorts and luxury celebration spaces by EventSamaroh.",
+};
+
+export default function PrivateVenueBookingPage() {
+  return (
+    <main className="overflow-hidden">
+
+      {/* ================= HERO ================= */}
+      <section className="relative min-h-[75vh] sm:min-h-[85vh] flex items-center justify-center text-center text-white">
+
+        <Image
+          src="/images/services/private-parties/hero.webp"
+          alt="Private Party Venue Booking in Pune"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+
+        <div className="relative z-10 px-6 max-w-4xl">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-semibold leading-tight">
+            Private Party Venue Booking in Pune
+          </h1>
+
+          <p className="mt-6 text-lg sm:text-xl text-white/85 max-w-2xl mx-auto">
+            Discover stylish and premium venues for private parties,
+            anniversaries and exclusive celebrations.
+          </p>
+
+          <Link
+            href="/contact"
+            className="inline-block mt-10 px-8 py-3 bg-brand-accent text-white rounded-full hover:scale-105 transition"
+          >
+            Find Perfect Venue
+          </Link>
+        </div>
+      </section>
+
+      {/* ================= OVERVIEW ================= */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+
+          <h2 className="text-3xl sm:text-4xl font-heading text-brand-primary">
+            Curated Private Party Venues Across Pune
+          </h2>
+
+          <p className="mt-8 text-brand-muted leading-relaxed">
+            EventSamaroh offers professional private party venue booking
+            services in Pune for birthdays, anniversaries,
+            cocktail nights and milestone celebrations.
+          </p>
+
+          <p className="mt-6 text-brand-muted leading-relaxed">
+            We help you select venues based on guest capacity,
+            ambience preference, accessibility and event type,
+            ensuring the ideal setting for your celebration.
+          </p>
+
+        </div>
+      </section>
+
+      {/* ================= WHAT WE OFFER ================= */}
+      <section className="py-20 bg-brand-soft">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+
+          <h2 className="text-3xl font-heading text-brand-primary">
+            Venue Options We Provide
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-10 mt-16">
+
+            <div className="bg-white p-8 rounded-2xl shadow-md">
+              <CheckCircle className="w-10 h-10 text-brand-accent mx-auto" />
+              <h3 className="mt-6 font-semibold text-brand-primary">
+                Banquet Halls
+              </h3>
+              <p className="mt-4 text-sm text-brand-muted">
+                Elegant indoor venues suitable for private celebrations.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-2xl shadow-md">
+              <CheckCircle className="w-10 h-10 text-brand-accent mx-auto" />
+              <h3 className="mt-6 font-semibold text-brand-primary">
+                Rooftop & Lounge Spaces
+              </h3>
+              <p className="mt-4 text-sm text-brand-muted">
+                Stylish rooftop venues and modern party lounges.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-2xl shadow-md">
+              <CheckCircle className="w-10 h-10 text-brand-accent mx-auto" />
+              <h3 className="mt-6 font-semibold text-brand-primary">
+                Resorts & Boutique Venues
+              </h3>
+              <p className="mt-4 text-sm text-brand-muted">
+                Scenic and premium venues for exclusive gatherings.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ================= FAQ ================= */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+
+          <h2 className="text-3xl font-heading text-brand-primary text-center">
+            Private Party Venue FAQs
+          </h2>
+
+          <div className="mt-12 space-y-8">
+
+            <div>
+              <h3 className="font-semibold text-lg">
+                How do you help in selecting party venues?
+              </h3>
+              <p className="mt-2 text-brand-muted">
+                We shortlist venues based on budget,
+                guest count and event style preferences.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-lg">
+                Do you negotiate venue pricing?
+              </h3>
+              <p className="mt-2 text-brand-muted">
+                Yes, we assist with booking coordination
+                and pricing negotiations.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-lg">
+                Can decor and catering be coordinated with the venue?
+              </h3>
+              <p className="mt-2 text-brand-muted">
+                We ensure seamless coordination between venue,
+                decor and catering vendors.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-lg">
+                How early should venues be booked?
+              </h3>
+              <p className="mt-2 text-brand-muted">
+                We recommend booking at least 3–6 weeks
+                before the celebration date.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================= RELATED SERVICES ================= */}
+      <section className="py-16 bg-brand-soft">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+
+          <h2 className="text-2xl font-heading text-brand-primary">
+            Explore More Private Party Services
+          </h2>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-4 text-brand-accent">
+
+            <Link href="/services/private-parties/theme-decor" className="hover:underline">
+              Theme & Decor
+            </Link>
+
+            <Link href="/services/private-parties/catering-entertainment" className="hover:underline">
+              Catering & Entertainment
+            </Link>
+
+            <Link href="/services/private-parties/photography" className="hover:underline">
+              Photography
+            </Link>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================= CTA ================= */}
+      <section className="relative py-24 overflow-hidden">
+
+        <Image
+          src="/images/services/private-parties/hero.webp"
+          alt="Private Party Venue Booking Services in Pune"
+          fill
+          className="object-cover"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/70 to-black/90" />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-6 text-center text-white">
+
+          <h2 className="text-3xl sm:text-4xl font-heading font-semibold">
+            Secure the Perfect Venue for Your Celebration
+          </h2>
+
+          <Link
+            href="/contact"
+            className="inline-block mt-10 px-8 py-3 bg-brand-accent text-white rounded-full hover:scale-105 transition"
+          >
+            Book Venue Consultation
+          </Link>
+
+        </div>
+      </section>
+
+    </main>
+  );
+}

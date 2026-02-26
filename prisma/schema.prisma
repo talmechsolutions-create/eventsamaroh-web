@@ -1,0 +1,259 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/////////////////////////////////////////////////////
+// ENUMS
+/////////////////////////////////////////////////////
+
+enum LeadStatus {
+  PENDING_APPROVAL
+  CONFIRMED
+  CANCELLED
+}
+
+enum LeadStage {
+  NEW
+  CONTACTED
+  QUOTED
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum LeadPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum PaymentType {
+  FULL
+  ADVANCE
+  BALANCE
+}
+
+enum InvoiceStatus {
+  DRAFT
+  ISSUED
+  CANCELLED
+}
+
+enum InvoiceType {
+  PROFORMA
+  TAX
+  FINAL
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+/////////////////////////////////////////////////////
+// USER
+/////////////////////////////////////////////////////
+
+model User {
+  id       String   @id @default(cuid())
+  email    String   @unique
+  password String
+  role     UserRole @default(USER)
+
+  assignedLeads Lead[] @relation("AssignedLeads")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+/////////////////////////////////////////////////////
+// LEAD
+/////////////////////////////////////////////////////
+
+model Lead {
+  id         Int    @id @default(autoincrement())
+  customerId String @unique
+
+  name  String
+  phone String
+  email String?
+
+  eventCategory String
+  eventType     String?
+  serviceSlug   String?
+  source        String  @default("Website")
+
+  eventDate DateTime?
+  location  String?
+  guests    Int?
+
+  contractAmount Decimal @default(0) @db.Decimal(12, 2)
+  paidAmount     Decimal @default(0) @db.Decimal(12, 2)
+  balanceAmount  Decimal @default(0) @db.Decimal(12, 2)
+
+  status   LeadStatus   @default(PENDING_APPROVAL)
+  stage    LeadStage    @default(NEW)
+  priority LeadPriority @default(MEDIUM)
+
+  followUpDate      DateTime?
+  followUpCompleted Boolean   @default(false)
+  notes             String?
+
+  assignedToId String?
+  assignedTo   User?   @relation("AssignedLeads", fields: [assignedToId], references: [id])
+
+  isArchived Boolean @default(false)
+
+  payments   Payment[]
+  invoices   Invoice[]
+  booking    Booking?
+  activities LeadActivity[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([phone])
+  @@index([email])
+  @@index([eventDate])
+  @@index([source])
+  @@index([status])
+  @@index([stage])
+  @@index([priority])
+  @@index([followUpDate])
+  @@index([createdAt])
+}
+
+/////////////////////////////////////////////////////
+// PAYMENT
+/////////////////////////////////////////////////////
+
+model Payment {
+  id     Int @id @default(autoincrement())
+  leadId Int
+
+  type PaymentType
+
+  baseAmount  Decimal @db.Decimal(12, 2)
+  discount    Decimal @default(0) @db.Decimal(12, 2)
+  gstAmount   Decimal @db.Decimal(12, 2)
+  finalAmount Decimal @db.Decimal(12, 2)
+
+  status PaymentStatus @default(PENDING)
+
+  approvedByAdmin Boolean   @default(false)
+  approvedAt      DateTime?
+  paidAt          DateTime?
+
+  updatedByAdminId String?
+
+  paymentLink       String? @unique
+  razorpayOrderId   String? @unique
+  razorpayPaymentId String?
+  razorpaySignature String?
+
+  lead    Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  invoice Invoice?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([leadId])
+  @@index([status])
+  @@index([paidAt])
+  @@index([approvedByAdmin])
+}
+
+/////////////////////////////////////////////////////
+// INVOICE
+/////////////////////////////////////////////////////
+
+model Invoice {
+  id        Int  @id @default(autoincrement())
+  leadId    Int
+  paymentId Int? @unique
+
+  invoiceNumber String @unique
+
+  type   InvoiceType   @default(TAX)
+  status InvoiceStatus @default(ISSUED)
+
+  customerName  String
+  customerEmail String?
+  customerPhone String
+  customerGST   String?
+  placeOfSupply String?
+
+  subtotal    Decimal @db.Decimal(12, 2)
+  discount    Decimal @default(0) @db.Decimal(12, 2)
+  gstRate     Decimal @default(18) @db.Decimal(5, 2)
+  gstAmount   Decimal @db.Decimal(12, 2)
+  totalAmount Decimal @db.Decimal(12, 2)
+
+  issuedAt DateTime @default(now())
+
+  lead    Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  payment Payment? @relation(fields: [paymentId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([leadId])
+  @@index([invoiceNumber])
+}
+
+/////////////////////////////////////////////////////
+// BOOKING
+/////////////////////////////////////////////////////
+
+model Booking {
+  id          Int      @id @default(autoincrement())
+  leadId      Int      @unique
+  confirmedAt DateTime @default(now())
+
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+}
+
+/////////////////////////////////////////////////////
+// LEAD ACTIVITY
+/////////////////////////////////////////////////////
+
+model LeadActivity {
+  id        Int      @id @default(autoincrement())
+  leadId    Int
+  type      String
+  message   String?
+  createdAt DateTime @default(now())
+
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId])
+  @@index([createdAt])
+}
+
+/////////////////////////////////////////////////////
+// INVOICE SEQUENCE (NEW – SAFE ADDITION)
+/////////////////////////////////////////////////////
+
+model InvoiceSequence {
+  id            Int    @id @default(autoincrement())
+  financialYear String @unique
+  lastNumber    Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
