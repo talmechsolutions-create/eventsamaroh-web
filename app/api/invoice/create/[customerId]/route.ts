@@ -1,4 +1,6 @@
-import { prisma } from "@/lib/prisma"
+export const runtime = "nodejs"
+
+import prisma from "@/lib/prisma"
 import { NextRequest, NextResponse } from "next/server"
 import { Prisma } from "@prisma/client"
 
@@ -10,10 +12,10 @@ function generateInvoiceNumber() {
 
 export async function POST(
   req: NextRequest,
-  context: { params: Promise<{ customerId: string }> }
+  context: { params: { customerId: string } }
 ) {
   try {
-    const { customerId } = await context.params
+    const { customerId } = context.params
 
     if (!customerId) {
       return NextResponse.json(
@@ -47,7 +49,6 @@ export async function POST(
       })
     }
 
-    // Convert Decimal safely
     const subtotal = new Prisma.Decimal(lead.contractAmount)
     const gstRate = new Prisma.Decimal(0.18)
     const gstAmount = subtotal.mul(gstRate)

@@ -1,8 +1,9 @@
 export const runtime = "nodejs"
 
-import { prisma } from "@/lib/prisma"
+import prisma from "@/lib/prisma"
 import { NextRequest, NextResponse } from "next/server"
-import puppeteer from "puppeteer"
+import puppeteer from "puppeteer-core"
+import chromium from "@sparticuz/chromium"
 
 function money(val: any) {
   return Number(val || 0).toLocaleString("en-IN", {
@@ -12,16 +13,11 @@ function money(val: any) {
 }
 
 function generateInvoiceHTML(invoice: any) {
-  const gstRate = Number(invoice.gstRate || 18)
-  const halfGst = Number(invoice.gstAmount || 0) / 2
-
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
 
-  return `...YOUR HTML REMAINS EXACTLY SAME...`
+  return `...YOUR EXISTING HTML HERE...`
 }
-
-/* ================= GET ================= */
 
 export async function GET(
   req: NextRequest,
@@ -50,12 +46,9 @@ export async function GET(
     }
 
     const browser = await puppeteer.launch({
-      headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-      ],
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
     })
 
     const page = await browser.newPage()
@@ -71,7 +64,6 @@ export async function GET(
 
     await browser.close()
 
-    // ✅ FIX: Wrap Uint8Array into Buffer
     return new NextResponse(Buffer.from(pdf), {
       headers: {
         "Content-Type": "application/pdf",

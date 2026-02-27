@@ -1,0 +1,478 @@
+Folder PATH listing
+Volume serial number is 48D5-340E
+C:.
+|   .env
+|   .gitignore
+|   middleware.ts.disabled
+|   next-env.d.ts
+|   next.config.js
+|   package-lock.json
+|   package.json
+|   postcss.config.js
+|   structure.txt
+|   tailwind.config.js
+|   tsconfig.json
+|   
++---app
+|   |   globals.css
+|   |   layout.tsx
+|   |   page.tsx
+|   |   robots.ts
+|   |   services-structure.txt
+|   |   ServicesCarousel.tsx
+|   |   sitemap.ts
+|   |   TestimonialsPreview.tsx
+|   |   
+|   +---api
+|   |   +---bookings
+|   |   |       route.ts
+|   |   |       
+|   |   +---invoice_disabled
+|   |   |   +---create
+|   |   |   |   \---[customerId]
+|   |   |   |           route.ts
+|   |   |   |           
+|   |   |   \---pdf
+|   |   |       \---[invoiceId]
+|   |   |               route.ts
+|   |   |               
+|   |   +---leads
+|   |   |   |   route.ts
+|   |   |   |   
+|   |   |   +---followup
+|   |   |   |       route.ts
+|   |   |   |       
+|   |   |   +---[id]
+|   |   |   |       route.ts
+|   |   |   |       
+|   |   |   \---_export_disabled
+|   |   |           route.ts
+|   |   |           
+|   |   +---public
+|   |   |   +---booking-confirmation
+|   |   |   |   \---[customerId]
+|   |   |   |           route.ts
+|   |   |   |           
+|   |   |   +---create-booking
+|   |   |   |       route.ts
+|   |   |   |       
+|   |   |   \---invoice
+|   |   |       \---pdf
+|   |   |           \---[invoiceId]
+|   |   |                   route.ts
+|   |   |                   
+|   |   +---webhooks
+|   |   |   +---marketing
+|   |   |   |       route.ts
+|   |   |   |       
+|   |   |   \---razorpay
+|   |   |           route.ts
+|   |   |           
+|   |   \---_admin_disabled
+|   |       +---analytics
+|   |       |       route.ts
+|   |       |       
+|   |       +---approve-payment
+|   |       |   \---[id]
+|   |       |           route.ts
+|   |       |           
+|   |       +---cancel-payment
+|   |       |       route.ts
+|   |       |       
+|   |       +---followups
+|   |       |       route.ts
+|   |       |       
+|   |       +---generate-payment-link
+|   |       |       route.ts
+|   |       |       
+|   |       +---leads
+|   |       |   +---create
+|   |       |   |       route.ts
+|   |       |   |       
+|   |       |   \---[id]
+|   |       |       |   route.ts
+|   |       |       |   
+|   |       |       \---stage
+|   |       |               route.ts
+|   |       |               
+|   |       +---update-payment
+|   |       |       route.ts
+|   |       |       
+|   |       \---verify-payment
+|   |               route.ts
+|   |               
+|   +---blog
+|   |   |   page.tsx
+|   |   |   
+|   |   +---best-wedding-venues-in-pune
+|   |   |       page.tsx
+|   |   |       
+|   |   +---blog[slug]
+|   |   |       page.tsx
+|   |   |       
+|   |   +---how-to-plan-wedding-in-pune
+|   |   |       page.tsx
+|   |   |       
+|   |   \---wedding-planning-cost-in-pune
+|   |           page.tsx
+|   |           
+|   +---book-event
+|   |       page.tsx
+|   |       
+|   +---contact
+|   |       page.tsx
+|   |       
+|   +---faq
+|   |   \---[city]
+|   |           page.tsx
+|   |           
+|   +---locations
+|   |   |   page.tsx
+|   |   |   
+|   |   +---baner
+|   |   |       page.tsx
+|   |   |       
+|   |   +---hinjewadi
+|   |   |       page.tsx
+|   |   |       
+|   |   +---kharadi
+|   |   |       page.tsx
+|   |   |       
+|   |   \---wakad
+|   |           page.tsx
+|   |           
+|   +---pay
+|   |   |   page.tsx
+|   |   |   PayForm.tsx
+|   |   |   
+|   |   \---[id]
+|   |           page.tsx
+|   |           
+|   +---portal
+|   |   \---[customerId]
+|   |           page.tsx
+|   |           
+|   +---services
+|   |   |   page.tsx
+|   |   |   
+|   |   +---birthday-parties
+|   |   |   |   page.tsx
+|   |   |   |   
+|   |   |   +---catering-entertainment
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---kids-party-planning
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---on-site-management
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---photography
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---theme-decoration
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   \---venue-booking
+|   |   |           page.tsx
+|   |   |           
+|   |   +---corporate-events
+|   |   |   |   page.tsx
+|   |   |   |   
+|   |   |   +---annual-meetings
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---conferences
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---on-site-management
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---product-launch
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---stage-av
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   \---venue-booking
+|   |   |           page.tsx
+|   |   |           
+|   |   +---decor-design
+|   |   |   |   page.tsx
+|   |   |   |   
+|   |   |   +---custom-installations
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---floral-styling
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---lighting-design
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---stage-mandap
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   \---theme-concepts
+|   |   |           page.tsx
+|   |   |           
+|   |   +---private-parties
+|   |   |   |   page.tsx
+|   |   |   |   
+|   |   |   +---catering-entertainment
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---on-site-management
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---photography
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   +---theme-decor
+|   |   |   |       page.tsx
+|   |   |   |       
+|   |   |   \---venue-booking
+|   |   |           page.tsx
+|   |   |           
+|   |   \---wedding-planning
+|   |       |   page.tsx
+|   |       |   
+|   |       +---artists
+|   |       |       page.tsx
+|   |       |       
+|   |       +---catering
+|   |       |       page.tsx
+|   |       |       
+|   |       +---coordination
+|   |       |       page.tsx
+|   |       |       
+|   |       +---decor-mandap
+|   |       |       page.tsx
+|   |       |       
+|   |       +---photography
+|   |       |       page.tsx
+|   |       |       
+|   |       \---venue-selection
+|   |               page.tsx
+|   |               
+|   +---terms-and-conditions
+|   |       page.tsx
+|   |       
+|   +---testimonials
+|   |       page.tsx
+|   |       
+|   +---thank-you
+|   |       page.tsx
+|   |       
+|   +---_dashboard_disabled
+|   |   \---admin
+|   |       |   AdminKPI.tsx
+|   |       |   AnalyticsCharts.tsx
+|   |       |   layout.tsx
+|   |       |   page.tsx
+|   |       |   QuickPaymentModal.tsx
+|   |       |   
+|   |       +---analytics
+|   |       |       AnalyticsClient.tsx
+|   |       |       page.tsx
+|   |       |       
+|   |       +---bookings
+|   |       |   |   page.tsx
+|   |       |   |   
+|   |       |   \---[id]
+|   |       |           page.tsx
+|   |       |           
+|   |       +---invoices
+|   |       |   |   page.tsx
+|   |       |   |   
+|   |       |   \---[id]
+|   |       |       |   page.tsx
+|   |       |       |   
+|   |       |       \---pdf
+|   |       |               route.ts
+|   |       |               
+|   |       +---leads
+|   |       |   |   LeadsTable.tsx
+|   |       |   |   page.tsx
+|   |       |   |   
+|   |       |   +---kanban
+|   |       |   |       KanbanBoard.tsx
+|   |       |   |       page.tsx
+|   |       |   |       
+|   |       |   +---new
+|   |       |   |       page.tsx
+|   |       |   |       
+|   |       |   +---update-followup
+|   |       |   |       route.ts
+|   |       |   |       
+|   |       |   +---update-notes
+|   |       |   |       route.ts
+|   |       |   |       
+|   |       |   +---update-stage
+|   |       |   |       route.ts
+|   |       |   |       
+|   |       |   \---[id]
+|   |       |       |   FollowUpEditor.tsx
+|   |       |       |   LeadDetailClient.tsx
+|   |       |       |   LeftPanelEditable.tsx
+|   |       |       |   page.tsx
+|   |       |       |   PaymentGenerator.tsx
+|   |       |       |   RightPanelTabs.tsx
+|   |       |       |   
+|   |       |       \---update
+|   |       |               route.ts
+|   |       |               
+|   |       \---payments
+|   |           |   page.tsx
+|   |           |   
+|   |           \---[id]
+|   |                   page.tsx
+|   |                   
+|   \---_secure_disabled
+|       +---bookings
+|       |       page.tsx
+|       |       
+|       \---payments
+|               page.tsx
+|               
++---components
+|   |   BrandButton.tsx
+|   |   FloatingWhatsApp.tsx
+|   |   Footer.tsx
+|   |   Header.tsx
+|   |   LeadForm.tsx
+|   |   ProtectedRoute.tsx
+|   |   SectionHeading.tsx
+|   |   ServiceCard.tsx
+|   |   Typography.tsx
+|   |   
+|   \---admin
+|           AdminActions.tsx
+|           AdminCard.tsx
+|           AdminList.tsx
+|           
++---lib
+|   |   auth.ts
+|   |   prisma.ts
+|   |   rateLimit.ts
+|   |   
+|   +---email
+|   |       sendInvoiceEmail.ts
+|   |       
+|   +---invoice
+|   |       generateInvoiceNumber.ts
+|   |       
+|   +---payment
+|   |       pricing.ts
+|   |       summary.ts
+|   |       
+|   +---pdf
+|   |       invoiceTemplate.ts
+|   |       
+|   \---sms
+|           sendSMS.ts
+|           
++---prisma
+|   |   dev.db-journal
+|   |   schema.prisma
+|   |   
+|   \---migrations
+|       |   migration_lock.toml
+|       |   
+|       +---20260217094025_init_postgres
+|       |       migration.sql
+|       |       
+|       +---20260217094317_refine_payment_structure
+|       |       migration.sql
+|       |       
+|       +---20260217094957_add_contract_amount_and_finalize_payment
+|       |       migration.sql
+|       |       
+|       +---20260218054722_upgrade_public_payment_flow
+|       |       migration.sql
+|       |       
+|       +---20260218055932_add_admin_approval
+|       |       migration.sql
+|       |       
+|       +---20260218070646_add_customer_fields
+|       |       migration.sql
+|       |       
+|       +---20260218085915_fix_balance_required
+|       |       migration.sql
+|       |       
+|       +---20260219070155_enterprise_invoice_upgrade
+|       |       migration.sql
+|       |       
+|       +---20260223125157_add_lead_activity
+|       |       migration.sql
+|       |       
+|       +---20260223163704_add_user_auth
+|       |       migration.sql
+|       |       
+|       +---20260223215915_crm_upgrade
+|       |       migration.sql
+|       |       
+|       +---20260224123818_payment_upgrade
+|       |       migration.sql
+|       |       
+|       +---20260224153625_payment_status_upgrade
+|       |       migration.sql
+|       |       
+|       \---20260225105534_add_invoice_sequence
+|               migration.sql
+|               
++---public
+|   |   hero-main.webp
+|   |   logo-watermark.png
+|   |   og-image.jpg
+|   |   
+|   +---fonts
+|   |       Inter_18pt-Regular.ttf
+|   |       
+|   \---images
+|       +---about
+|       +---brand
+|       +---hero
+|       |       hero-main.webp
+|       |       
+|       +---payment
+|       +---services
+|       |   |   birthday.webp
+|       |   |   corporate.webp
+|       |   |   decor.webp
+|       |   |   private.webp
+|       |   |   wedding-couple.webp
+|       |   |   wedding-hero.webp
+|       |   |   wedding-stage.webp
+|       |   |   wedding-venue.webp
+|       |   |   wedding.webp
+|       |   |   
+|       |   +---birthday
+|       |   |       gallery-1.webp
+|       |   |       gallery-2.webp
+|       |   |       hero.webp
+|       |   |       
+|       |   +---corporate
+|       |   |       gallery-1.webp
+|       |   |       gallery-2.webp
+|       |   |       hero.webp
+|       |   |       
+|       |   +---decor
+|       |   |       gallery-1.webp
+|       |   |       gallery-2.webp
+|       |   |       hero.webp
+|       |   |       
+|       |   +---private-parties
+|       |   |       gallery-1.webp
+|       |   |       gallery-2.webp
+|       |   |       hero.webp
+|       |   |       
+|       |   \---wedding
+|       |           authority.webp
+|       |           gallery-1.webp
+|       |           gallery-2.webp
+|       |           hero.webp
+|       |           
+|       \---testimonials
+\---types
+        next-auth.d.ts
+        
