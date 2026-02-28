@@ -2,89 +2,79 @@ export const runtime = "nodejs"
 
 import { NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
-import {
-  Prisma,
-  LeadStatus,
-  LeadStage,
-  LeadPriority,
-} from "@prisma/client"
+import { LeadStage, LeadStatus, LeadPriority } from "@prisma/client"
 
 export async function POST(req: Request) {
   try {
     const body = await req.json()
+    const { leadId } = body
 
-    const {
-      eventType,
-      eventDate,
-      location,
-      guests,
-      name,
-      phone,
-      details,
-    } = body
-
-    if (!eventType || !eventDate || !location || !guests || !name || !phone) {
+    if (!leadId || !Number.isInteger(leadId)) {
       return NextResponse.json(
-        { success: false, error: "Missing required fields" },
+        { success: false, error: "Invalid lead ID" },
         { status: 400 }
       )
     }
 
-    const parsedDate = new Date(eventDate)
-    if (isNaN(parsedDate.getTime())) {
+    // 🔍 Check lead exists
+    const lead = await prisma.lead.findUnique({
+      where: { id: leadId },
+      include: { booking: true },
+    })
+
+    if (!lead) {
       return NextResponse.json(
-        { success: false, error: "Invalid event date" },
-        { status: 400 }
+        { success: false, error: "Lead not found" },
+        { status: 404 }
       )
     }
 
-    const parsedGuests = Number(guests)
-    if (!Number.isInteger(parsedGuests) || parsedGuests <= 0) {
+    // 🚫 Prevent duplicate booking
+    if (lead.booking) {
       return NextResponse.json(
-        { success: false, error: "Invalid guest count" },
-        { status: 400 }
+        { success: true, message: "Booking already exists" }
       )
     }
 
-    const lead = await prisma.lead.create({
-      data: {
-        customerId: `CUS-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+    // 🔒 Transaction for safety
+    const result = await prisma.$transaction(async (tx) => {
 
-        name,
-        phone,
-        email: null,
+      const booking = await tx.booking.create({
+        data: {
+          leadId: lead.id,
+        },
+      })
 
-        eventCategory: eventType,
-        eventType,
-        serviceSlug: null,
-        source: "Website",
+      await tx.lead.update({
+        where: { id: lead.id },
+        data: {
+          stage: LeadStage.WON,
+          status: LeadStatus.CONFIRMED,
+          priority: LeadPriority.HIGH,
+        },
+      })
 
-        eventDate: parsedDate,
-        location,
-        guests: parsedGuests,
+      await tx.leadActivity.create({
+        data: {
+          leadId: lead.id,
+          type: "BOOKING_CONFIRMED",
+          message: "Lead converted to booking",
+        },
+      })
 
-        contractAmount: new Prisma.Decimal(0),
-        paidAmount: new Prisma.Decimal(0),
-        balanceAmount: new Prisma.Decimal(0),
-
-        status: LeadStatus.PENDING_APPROVAL,
-        stage: LeadStage.NEW,
-        priority: LeadPriority.MEDIUM,
-
-        notes: details || null,
-      },
+      return booking
     })
 
     return NextResponse.json({
       success: true,
-      leadId: lead.id,
+      bookingId: result.id,
     })
 
   } catch (error) {
-    console.error("LEAD CREATION ERROR:", error)
+    console.error("BOOKING ERROR:", error)
 
     return NextResponse.json(
-      { success: false, error: "Database error" },
+      { success: false, error: "Booking failed" },
       { status: 500 }
     )
   }
