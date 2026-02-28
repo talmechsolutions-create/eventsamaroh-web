@@ -19,9 +19,33 @@ const bodyFont = Inter({
   display: "swap",
 });
 
+/* ✅ Improved Global Metadata */
 export const metadata: Metadata = {
-  title: "Your Brand",
-  description: "Premium Service Experience",
+  metadataBase: new URL("https://eventsamaroh.in"), // change if different domain
+  title: {
+    default: "EventSamaroh | Luxury Event Management Company in Pune",
+    template: "%s | EventSamaroh",
+  },
+  description:
+    "EventSamaroh is a premium event management company in Pune specializing in weddings, corporate events and private celebrations.",
+  keywords: [
+    "event management company in Pune",
+    "wedding planner Pune",
+    "corporate event management Pune",
+    "luxury wedding planner Pune",
+  ],
+  openGraph: {
+    title: "EventSamaroh | Luxury Event Management Company in Pune",
+    description:
+      "Premium wedding planning and corporate event management services in Pune.",
+    url: "https://eventsamaroh.in",
+    siteName: "EventSamaroh",
+    locale: "en_IN",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://eventsamaroh.in",
+  },
 };
 
 export default function RootLayout({
@@ -36,7 +60,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-body antialiased bg-brand-soft text-brand-primary min-h-screen">
-        
+
         <Header />
 
         <div className="flex flex-col min-h-screen">
@@ -45,7 +69,7 @@ export default function RootLayout({
           </main>
 
           <footer className="text-center py-6 text-sm text-brand-muted border-t border-black/5">
-            © {new Date().getFullYear()} Your Brand. All rights reserved.
+            © {new Date().getFullYear()} EventSamaroh. All rights reserved.
           </footer>
         </div>
 
