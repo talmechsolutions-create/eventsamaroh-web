@@ -7,8 +7,10 @@ type LeadDetailProps = {
   lead: any
 }
 
+type TabType = "overview" | "payments" | "activity"
+
 export default function LeadDetailClient({ lead }: LeadDetailProps) {
-  const [activeTab, setActiveTab] = useState<"overview" | "payments" | "activity">("overview")
+  const [activeTab, setActiveTab] = useState<TabType>("overview")
 
   return (
     <div className="p-8 max-w-6xl mx-auto space-y-8">
@@ -19,7 +21,7 @@ export default function LeadDetailClient({ lead }: LeadDetailProps) {
             {lead.name}
           </h1>
           <p className="text-gray-500 mt-1">
-            {lead.phone} • {lead.email}
+            {lead.phone} • {lead.email || "—"}
           </p>
         </div>
 
@@ -59,14 +61,14 @@ export default function LeadDetailClient({ lead }: LeadDetailProps) {
 
       {/* Tabs */}
       <div className="flex gap-6 border-b mt-8">
-        {["overview", "payments", "activity"].map((tab) => (
+        {(["overview", "payments", "activity"] as TabType[]).map((tab) => (
           <button
             key={tab}
-            onClick={() => setActiveTab(tab as any)}
-            className={`pb-3 capitalize ${
+            onClick={() => setActiveTab(tab)}
+            className={`pb-3 capitalize transition ${
               activeTab === tab
                 ? "border-b-2 border-black font-semibold"
-                : "text-gray-500"
+                : "text-gray-500 hover:text-black"
             }`}
           >
             {tab}
@@ -74,16 +76,16 @@ export default function LeadDetailClient({ lead }: LeadDetailProps) {
         ))}
       </div>
 
-      {/* Payment History Tab */}
+      {/* Payments Tab */}
       {activeTab === "payments" && (
         <div className="bg-white shadow rounded-xl p-6 mt-6">
           <h2 className="text-lg font-semibold mb-4">Payment History</h2>
 
-          {lead.payments.length === 0 ? (
+          {lead.payments?.length === 0 ? (
             <p className="text-gray-500 text-sm">No payments yet.</p>
           ) : (
             <div className="space-y-4">
-              {lead.payments.map((payment: any) => (
+              {lead.payments?.map((payment: any) => (
                 <div
                   key={payment.id}
                   className="flex justify-between items-center border p-4 rounded-lg"
@@ -151,6 +153,28 @@ export default function LeadDetailClient({ lead }: LeadDetailProps) {
 
       {/* Payment Generator */}
       <PaymentGenerator leadId={lead.id} />
+
+      {/* Convert to Booking */}
+      {!lead.booking && lead.stage !== "WON" && (
+        <div className="mt-6">
+          <button
+            onClick={async () => {
+              const res = await fetch(`/api/leads/${lead.id}/convert`, {
+                method: "POST",
+              })
+
+              if (res.ok) {
+                window.location.reload()
+              } else {
+                alert("Conversion failed")
+              }
+            }}
+            className="bg-green-600 hover:bg-green-700 transition text-white px-6 py-3 rounded-lg"
+          >
+            Convert to Booking
+          </button>
+        </div>
+      )}
     </div>
   )
 }
