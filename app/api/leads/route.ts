@@ -155,11 +155,11 @@ export async function POST(req: Request) {
 
     return NextResponse.json(serializeLead(lead))
 
-  } catch (error) {
-    console.error("POST Lead Error:", error)
+  } catch (error: any) {
+    console.error("POST Lead Error FULL:", error);
     return NextResponse.json(
-      { error: "Lead creation failed" },
+      { error: error.message || "Lead creation failed" },
       { status: 500 }
-    )
+    );
   }
 }
