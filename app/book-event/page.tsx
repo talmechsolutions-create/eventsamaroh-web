@@ -34,17 +34,28 @@ export default function BookEventPage() {
         body: JSON.stringify(data),
       });
 
-      const result = await res.json();
+      const text = await res.text();
 
-      if (res.ok) {
-        setSuccess(true);
-        setMessage("Consultation request submitted successfully.");
-        form.reset();
-      } else {
-        setMessage(result.error || "Something went wrong");
+      console.log("RAW RESPONSE:", text);
+
+      let result;
+      try {
+        result = JSON.parse(text);
+      } catch {
+        throw new Error("Invalid JSON response");
       }
-    } catch (error) {
-      setMessage("Server connection failed");
+
+      if (!res.ok) {
+        throw new Error(result.error || "Request failed");
+      }
+
+      setSuccess(true);
+      setMessage("Consultation request submitted successfully.");
+      form.reset();
+
+    } catch (error: any) {
+      console.error("FORM ERROR:", error);
+      setMessage(error.message || "Server connection failed");
     }
 
     setLoading(false);
