@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ReactNode } from "react";
 import { Playfair_Display, Inter } from "next/font/google";
 import Header from "@/components/Header";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const headingFont = Playfair_Display({
   subsets: ["latin"],
@@ -47,6 +48,8 @@ export default function RootLayout({
             © {new Date().getFullYear()} Your Brand. All rights reserved.
           </footer>
         </div>
+
+        <FloatingWhatsApp />
 
       </body>
     </html>
