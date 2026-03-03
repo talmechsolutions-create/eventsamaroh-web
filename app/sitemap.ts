@@ -1,78 +1,42 @@
 import { MetadataRoute } from "next";
 
+const baseUrl = "https://eventsamaroh.in";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://eventsamaroh.com";
-
-  return [
-    {
-      url: `${baseUrl}/`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/wedding-planning`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/services/corporate-events`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/services/birthday-parties`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/services/private-parties`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/services/decor-design`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/book-event`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-  url: `${baseUrl}/locations`,
-  lastModified: new Date(),
-  changeFrequency: "monthly",
-  priority: 0.8,
-},
-{
-  url: "https://eventsamaroh.com/blog/wedding-planning-cost-in-pune",
-},
-{
-  url: "https://eventsamaroh.com/blog/best-wedding-venues-in-pune",
-},
-{
-  url: "https://eventsamaroh.com/blog/how-to-plan-wedding-in-pune",
-},
-
+  const staticRoutes = [
+    "",
+    "services",
+    "services/wedding-planning",
+    "services/corporate-events",
+    "services/birthday-parties",
+    "services/private-parties",
+    "services/decor-design",
+    "contact",
+    "book-event",
+    "locations",
+    "locations/baner",
+    "locations/hinjewadi",
+    "locations/kharadi",
+    "locations/wakad",
+    "blog",
+    "blog/wedding-planning-cost-in-pune",
+    "blog/best-wedding-venues-in-pune",
+    "blog/how-to-plan-wedding-in-pune",
   ];
+
+  return staticRoutes.map((route) => ({
+    url: `${baseUrl}/${route}`,
+    lastModified: new Date(),
+    changeFrequency: route.startsWith("blog") ? "weekly" : "monthly",
+    priority:
+      route === ""
+        ? 1
+        : route.startsWith("services")
+        ? 0.9
+        : route.startsWith("locations")
+        ? 0.8
+        : route.startsWith("blog")
+        ? 0.7
+        : 0.6,
+  }));
 }

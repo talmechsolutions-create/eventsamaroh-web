@@ -19,33 +19,63 @@ const bodyFont = Inter({
   display: "swap",
 });
 
-/* ✅ Improved Global Metadata */
+/* ✅ Updated Global Metadata */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://eventsamaroh.in"), // change if different domain
+  metadataBase: new URL("https://eventsamaroh.in"),
+
   title: {
     default: "EventSamaroh | Luxury Event Management Company in Pune",
     template: "%s | EventSamaroh",
   },
+
   description:
-    "EventSamaroh is a premium event management company in Pune specializing in weddings, corporate events and private celebrations.",
+    "EventSamaroh is a premium event management company in Pune specializing in luxury weddings, corporate events, private celebrations and bespoke decor services across Baner, Wakad, Hinjewadi, Kharadi and all major Pune locations.",
+
   keywords: [
     "event management company in Pune",
-    "wedding planner Pune",
+    "wedding planner in Pune",
     "corporate event management Pune",
     "luxury wedding planner Pune",
+    "birthday party planner Pune",
+    "event decor services Pune",
+    "event planner in Baner",
+    "event planner in Wakad",
+    "event planner in Hinjewadi",
   ],
+
   openGraph: {
-    title: "EventSamaroh | Luxury Event Management Company in Pune",
+    title:
+      "EventSamaroh | Luxury Event Management Company in Pune",
     description:
-      "Premium wedding planning and corporate event management services in Pune.",
+      "Premium wedding planning, corporate event management and private celebrations executed with precision across Pune.",
     url: "https://eventsamaroh.in",
     siteName: "EventSamaroh",
     locale: "en_IN",
     type: "website",
+    images: [
+      {
+        url: "https://eventsamaroh.in/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "EventSamaroh - Event Management Company in Pune",
+      },
+    ],
   },
+
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "EventSamaroh | Luxury Event Management Company in Pune",
+    description:
+      "Luxury wedding and corporate event management services in Pune.",
+    images: ["https://eventsamaroh.in/og-image.jpg"],
+  },
+
   alternates: {
     canonical: "https://eventsamaroh.in",
   },
+
+  category: "Event Management",
 };
 
 export default function RootLayout({
@@ -60,7 +90,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-body antialiased bg-brand-soft text-brand-primary min-h-screen">
-
         <Header />
 
         <div className="flex flex-col min-h-screen">
@@ -74,7 +103,6 @@ export default function RootLayout({
         </div>
 
         <FloatingWhatsApp />
-
       </body>
     </html>
   );
